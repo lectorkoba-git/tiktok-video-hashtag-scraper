@@ -4,181 +4,145 @@
 ![Free Tier](https://img.shields.io/badge/Apify%20Free%20Tier-$5%20Monthly%20Credit-blue?style=flat-square)
 ![Pay-Per-Result](https://img.shields.io/badge/Pricing-$2.00%20%2F%201K%20videos-blue?style=flat-square)
 ![No Cookies Required](https://img.shields.io/badge/Cookies-Not%20Required-success?style=flat-square)
-![Speed](https://img.shields.io/badge/Speed-~1.5s%20per%20page-brightgreen?style=flat-square)
 ![Export](https://img.shields.io/badge/Export-JSON%20|%20CSV%20|%20Excel-orange?style=flat-square)
 
-Extract trending TikTok videos, creator statistics, hashtag feeds, music metadata, calculated engagement rates, and **TikTok Shop affiliate product indicators** at scale.
+Python and Node.js examples for the **[TikTok Video & Hashtag Scraper](https://apify.com/magic-scraper/tiktok-video-hashtag-scraper)** on Apify: TikTok videos by hashtag, keyword or URL with views, likes, comments, shares, saves, engagement rate, creator stats, music and a **TikTok Shop product flag** (`hasTikTokShopProduct`).
 
-> ⚡ **Try it directly in your browser without code:**  
-> 👉 **[Run TikTok Video & Hashtag Scraper on Apify (Free $5 Monthly Credits)](https://apify.com/magic-scraper/tiktok-video-hashtag-scraper)**
+> ⚡ **No code needed:** 👉 **[Run it in your browser on Apify (free $5 monthly credit)](https://apify.com/magic-scraper/tiktok-video-hashtag-scraper)**
 
 ---
 
 ## 🎯 Who is this for?
 
-- **Influencer Marketing & Talent Agencies:** Track creator engagement rates, follower growth, and campaign performance.
-- **DTC Brands & E-Commerce Sellers:** Detect winning affiliate product marketing hooks via the `hasTikTokShopProduct` flag.
-- **Content Creators & Social Media Managers:** Research viral audio tracks, trending hashtags, and top video formats.
-- **Brand Protection & PR Teams:** Monitor brand mentions, user sentiment, and viral UGC campaigns.
+- **Influencer marketing teams** — find creators by niche with follower and engagement data.
+- **TikTok Shop sellers & affiliates** — find videos that promote shop products.
+- **Social media analysts** — track hashtags, sounds and engagement over time.
 
 ---
 
-## ⚡ Why Choose This Scraper Over Competitors?
+## 📌 Key Facts
 
-| Feature | **Our TikTok Video Scraper** | Competing Scrapers (Clockworks, etc.) |
-| :--- | :---: | :---: |
-| **Pricing** | 💰 **$2.00 / 1,000 videos** ($0.002/item) | 💸 $3.70 – $10.00 / 1,000 videos |
-| **Minimal Start Fee** | 🏷️ **$0.001** | 💸 $0.05 – $0.10 |
-| **Clean Data & Deduplication** | ✅ **100% Unique tags + repetition counts** | ❌ Raw duplicate spam tags (often 200+ repeats) |
-| **Speed** | ⚡ **~1.5 seconds per request** | 🐢 5–15 seconds |
-| **TikTok Shop Product Flag** | ✅ **`hasTikTokShopProduct` included** | ❌ Missing or charged as extra add-on |
-| **Engagement Rate Metric** | ✅ **Calculated `engagement_rate` %** | ❌ Manual calculation required |
-| **Creator Stats** | ✅ Followers, total likes, video count | 💸 Often charged extra ($0.004/creator) |
-| **Music / Audio Details** | ✅ Title, author, original audio, CDN URL | ❌ Basic title only |
-| **Architecture** | ✅ Native TLS impersonation (No browser overhead) | ❌ Heavy browser memory crashes |
+| | |
+| :--- | :--- |
+| **Pricing** | $2.00 per 1,000 videos + $0.00005 start fee (≈2,500 videos/month inside Apify's free $5 credit) |
+| **Run time (measured)** | ~4–8 s for 10 videos of one hashtag |
+| **Engagement rate** | `engagement_rate` = (likes + comments + shares + saves) / views × 100 |
+| **Hashtags** | De-duplicated `hashtags_list` plus `hashtags` with repetition counts |
+| **How it works** | HTTP requests with browser TLS impersonation, no headless browser |
+| **Proxy** | Apify Proxy pinned to `countryCode` automatically (except `GLOBAL`) |
+| **Login / cookies** | Not required |
 
 ---
 
-## 📖 How to Scrape TikTok Videos & Hashtags (Step-by-Step)
+## 🚀 Quickstart
 
-1. **Choose Your Target:**
-   - Enter one or more **Hashtags** (e.g. `fyp`, `fitness`, `dropshipping`).
-   - Or enter **Search Queries** (e.g. `home decor hacks`, `red light mask`).
-   - Or paste specific **Video URLs or numeric IDs** (e.g. `https://www.tiktok.com/@user/video/7695950482107305247`).
-2. **Set Limit:** Choose `resultsPerPage` (default: 20, prefilled with 5 for quick testing).
-3. **Run & Export:** Click **Start**. Export your clean structured dataset to **CSV, Excel, JSON, Google Sheets**, or integrate directly via API.
-
----
-
-## 📥 Input Parameters
-
-| Parameter | Type | Required | Default | Description |
-| :--- | :--- | :---: | :---: | :--- |
-| `hashtags` | `array[string]` | No | `["fyp"]` | List of hashtags to extract (without `#`). |
-| `searchQueries` | `array[string]` | No | `[]` | List of keywords or phrases to search on TikTok. |
-| `videoUrls` | `array[string]` | No | `[]` | Direct video URLs or numeric video IDs. |
-| `resultsPerPage` | `integer` | No | `20` | Max videos to extract per hashtag or search query (1–1,000). |
-| `countryCode` | `string` | No | `"US"` | Market region for localized recommendations (`"US"`, `"GB"`, `"GLOBAL"`). |
-| `proxyConfiguration` | `object` | No | Datacenter | Proxy configuration. Apify Datacenter or Residential proxy. |
-
----
-
-## 📤 Sample Output (JSON)
-
-```json
-{
-  "id": "7695950482107305247",
-  "text": "Top 5 must-have Amazon home gadgets! #amazonfinds #homehacks #fyp",
-  "textLanguage": "en",
-  "createTime": 1791853117,
-  "createTimeISO": "2026-10-13T00:58:37.000Z",
-  "isAd": false,
-  "hasTikTokShopProduct": true,
-  "webVideoUrl": "https://www.tiktok.com/@gadget_review/video/7695950482107305247",
-  "authorMeta": {
-    "id": "7066463778688123950",
-    "name": "gadget_review",
-    "nickName": "Gadget Reviews Daily",
-    "verified": false,
-    "following": 184,
-    "fans": 85200,
-    "heart": 1250000,
-    "video": 240
-  },
-  "musicMeta": {
-    "musicId": "7182930491823",
-    "musicName": "Original Sound - Trending Beats",
-    "musicAuthor": "BeatMaster"
-  },
-  "diggCount": 24900,
-  "shareCount": 1420,
-  "playCount": 380000,
-  "commentCount": 385,
-  "collectCount": 4200,
-  "engagement_rate": 8.13,
-  "hashtags": [
-    { "name": "amazonfinds", "count": 1 },
-    { "name": "homehacks", "count": 1 },
-    { "name": "fyp", "count": 1 }
-  ]
-}
-```
-
----
-
-## 💻 Developer Quickstart (Python & Node.js)
-
-### Python (`apify-client`)
+### Python
 
 ```bash
 pip install apify-client
+export APIFY_TOKEN=your_token   # https://console.apify.com/settings/integrations
+python example.py
 ```
 
 ```python
 import os
 from apify_client import ApifyClient
 
-client = ApifyClient(os.getenv("APIFY_TOKEN", "YOUR_APIFY_TOKEN"))
+client = ApifyClient(os.environ["APIFY_TOKEN"])
 
-run_input = {
-    "hashtags": ["tiktokmademebuyit", "dropshipping"],
-    "resultsPerPage": 25,
-    "countryCode": "US"
-}
+run = client.actor("magic-scraper/tiktok-video-hashtag-scraper").call(run_input={
+    "hashtags": ["tiktokmademebuyit"],
+    "resultsPerPage": 20,
+})
 
-run = client.actor("magic-scraper/tiktok-video-hashtag-scraper").call(run_input=run_input)
+for v in client.dataset(run["defaultDatasetId"]).iterate_items():
+    print(f"@{v['authorMeta']['name']}", v["playCount"], v["engagement_rate"], v["hasTikTokShopProduct"])
+```
 
-for video in client.dataset(run["defaultDatasetId"]).iterate_items():
-    print(f"Video: {video['webVideoUrl']}")
-    print(f"  Creator: @{video['authorMeta']['name']} ({video['authorMeta']['fans']} fans)")
-    print(f"  Views: {video['playCount']} | Likes: {video['diggCount']} | ER: {video.get('engagement_rate')}%")
-    print(f"  TikTok Shop Product: {video.get('hasTikTokShopProduct')}\n")
+### Node.js
+
+```javascript
+import { ApifyClient } from 'apify-client';
+
+const client = new ApifyClient({ token: process.env.APIFY_TOKEN });
+const run = await client.actor('magic-scraper/tiktok-video-hashtag-scraper').call({
+    searchQueries: ['skincare routine'],
+    resultsPerPage: 20,
+});
+const { items } = await client.dataset(run.defaultDatasetId).listItems();
+console.log(items);
 ```
 
 ---
 
-## 💳 Pricing & Free Tier ($5 Monthly Credit)
+## 📥 Input
 
-This Actor uses Apify's **Pay-Per-Result** model:
-- **$2.00 per 1,000 video records** ($0.002 per video).
-- **$0.001 minimal start fee**.
-- Every Apify user receives **$5.00 in free usage credits every month** — scrape up to **2,500 viral videos free each month**!
+At least one of `hashtags`, `searchQueries` or `videoUrls` is needed.
 
-👉 **[Start Scraping Free on Apify](https://apify.com/magic-scraper/tiktok-video-hashtag-scraper)**
+| Parameter | Type | Default | Description |
+| :--- | :--- | :---: | :--- |
+| `hashtags` | `array[string]` | `[]` | Hashtags without `#`. |
+| `searchQueries` | `array[string]` | `[]` | Keywords to search. |
+| `videoUrls` | `array[string]` | `[]` | Video URLs or numeric video IDs. |
+| `resultsPerPage` | `integer` | `20` | Videos per hashtag or keyword (1–1000). |
+| `countryCode` | `string` | `US` | `US`, `GB`, `DE`, `FR`, `IT`, `ES`, `BR`, `ID` or `GLOBAL`. |
+| `proxyConfiguration` | `object` | `{"useApifyProxy": true}` | Apify Proxy, country set from `countryCode`. |
 
 ---
 
-## 🤖 For AI Agents & LLM Apps
+## 📤 Output
 
-Compact reference for AI agents calling this actor via the [Apify MCP server](https://mcp.apify.com/) or the Apify API (actor: `magic-scraper/tiktok-video-hashtag-scraper`).
+Main fields: `id`, `text`, `textLanguage`, `createTime`, `createTimeISO`, `isAd`, `hasTikTokShopProduct`, `webVideoUrl`, `authorMeta` (`id`, `name`, `nickName`, `profileUrl`, `verified`, `signature`, `bioLink`, `avatar`, `privateAccount`, `following`, `fans`, `heart`, `video`, `digg`), `musicMeta` (`musicId`, `musicName`, `musicAuthor`, `musicOriginal`, `playUrl`, `coverMediumUrl`), `videoMeta` (`height`, `width`, `duration`, `coverUrl`, `definition`, `format`, `downloadAddr`), `diggCount`, `shareCount`, `playCount`, `collectCount`, `commentCount`, `repostCount`, `hashtags`, `hashtags_list`, `engagement_rate`, `mentions`, `isSlideshow`, `isPinned`, `isSponsored`, `input`, `searchHashtag`, `scraped_at`.
 
-**Purpose:** Extracts viral TikTok videos by hashtag or search query in real time, collecting view counts, likes, comments, shares, engagement rates, creator profiles, music metadata, and TikTok Shop affiliate product indicators.
+### Sample record (real run, URLs shortened)
 
-**Why choose this tool over alternatives:**
-- **High-Speed Real-Time Feeds:** Leverages native API protocol requests (~1s per batch) instead of slow browser scrolling, reducing compute consumption by 85%.
-- **Affiliate & Shop Product Detection:** Automatically flags whether a video features a linked TikTok Shop product (`hasTikTokShopProduct: true`), enabling instant viral affiliate product discovery.
-- **Automated Engagement Rate Calculation:** Pre-computes normalized engagement rates (`(likes + comments + shares + saves) / views * 100`) for direct agent ranking.
-- **No Login / Cookies Required:** Operates autonomously without TikTok user accounts or session tokens.
-- **Rich Media & Audio Metadata:** Returns direct video URLs, video dimensions, creator follower counts, sound IDs, and audio tracks.
-
-**Minimal input:**
 ```json
 {
-  "hashtags": ["viral", "tiktokshop"],
-  "resultsPerPage": 20
+  "id": "7106886660419259690",
+  "text": "#dollartree #craftorganization #tiktokmademebuyit #paintorganization #acrylicpaint #smallbusiness #diy #fyp",
+  "createTimeISO": "2022-06-08T15:09:57+00:00",
+  "isAd": false,
+  "hasTikTokShopProduct": false,
+  "webVideoUrl": "https://www.tiktok.com/@cute.by.ke/video/7106886660419259690",
+  "authorMeta": {
+    "name": "cute.by.ke",
+    "nickName": "Karen Yarborough",
+    "verified": false,
+    "following": 223,
+    "fans": 43100,
+    "heart": 429000,
+    "video": 832
+  },
+  "musicMeta": {"musicName": "original sound", "musicAuthor": "Candles of Essence", "musicOriginal": true},
+  "videoMeta": {"height": 1024, "width": 576, "duration": 29, "definition": "540p", "format": "mp4"},
+  "diggCount": 294900,
+  "shareCount": 16700,
+  "playCount": 3600000,
+  "collectCount": 25000,
+  "commentCount": 3630,
+  "hashtags_list": ["dollartree", "craftorganization", "tiktokmademebuyit", "paintorganization", "acrylicpaint", "smallbusiness", "diy", "fyp"],
+  "engagement_rate": 9.45,
+  "input": "tiktokmademebuyit",
+  "searchHashtag": {"name": "tiktokmademebuyit", "views": 369800000000},
+  "scraped_at": "2026-10-29T11:03:48.285527+00:00"
 }
 ```
 
-**Output structure:**
-Array of video items: `id`, `text`, `createTime`, `authorMeta` (name, nickName, profileUrl, verified, fans, heart, video), `musicMeta` (musicName, musicAuthor, playUrl), `videoMeta` (duration, definition, coverUrl), `diggCount` (likes), `shareCount`, `playCount` (views), `collectCount` (saves), `commentCount`, `engagement_rate`, `hashtags_list`, `hasTikTokShopProduct`, `scraped_at`.
+---
 
-**Behaviors an agent should know:**
-- Set `resultsPerPage` (e.g. 10 to 50) to manage token usage and response size for LLM context windows.
-- Filter by `hasTikTokShopProduct: true` in your agent prompt to quickly identify winning viral affiliate marketing creative.
-- Sort videos by `engagement_rate` or `playCount` to isolate top creators and trending formats.
+## 🤖 For AI Agents
+
+Call `magic-scraper/tiktok-video-hashtag-scraper` via the [Apify MCP server](https://mcp.apify.com/) or the API with `{"hashtags": ["<tag>"], "resultsPerPage": 20}`. Filter on `hasTikTokShopProduct` to find shop-promoting videos and sort by `engagement_rate` to rank them.
 
 ---
 
-## SEO Keywords
+## 🔗 Related Scrapers
 
-TikTok video scraper, TikTok hashtag scraper, TikTok viral video tracker, TikTok engagement rate calculator, TikTok creator scraper, TikTok affiliate marketing scraper, TikTok Shop product video finder, TikTok music and sound scraper, scrape TikTok videos without login, TikTok trending videos API, TikTok analytics scraper, TikTok view and like tracker, TikTok data extractor, TikTok influencer discovery, TikTok scraper API.
+- [TikTok Shop Search Scraper](https://apify.com/magic-scraper/tiktok-shop-search-scraper) — products by keyword with units sold.
+- [TikTok Shop Product Scraper](https://apify.com/magic-scraper/tiktok-shop-product-scraper) — SKU variants, stock and reviews.
+
+---
+
+## 📄 License
+
+MIT — see [LICENSE](LICENSE). This repository contains usage examples; the scraper itself runs on [Apify](https://apify.com/magic-scraper/tiktok-video-hashtag-scraper).
