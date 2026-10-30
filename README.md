@@ -2,7 +2,7 @@
 
 [![TikTok Video & Hashtag Scraper](https://apify.com/actor-badge?actor=magic-scraper/tiktok-video-hashtag-scraper)](https://apify.com/magic-scraper/tiktok-video-hashtag-scraper)
 ![Free Tier](https://img.shields.io/badge/Apify%20Free%20Tier-$5%20Monthly%20Credit-blue?style=flat-square)
-![Pay-Per-Result](https://img.shields.io/badge/Pricing-$2.00%20%2F%201K%20videos-blue?style=flat-square)
+![Pay-Per-Result](https://img.shields.io/badge/Pricing-$1.50%20%2F%201K%20videos-blue?style=flat-square)
 ![No Cookies Required](https://img.shields.io/badge/Cookies-Not%20Required-success?style=flat-square)
 ![Export](https://img.shields.io/badge/Export-JSON%20|%20CSV%20|%20Excel-orange?style=flat-square)
 
@@ -24,7 +24,7 @@ Python and Node.js examples for the **[TikTok Video & Hashtag Scraper](https://a
 
 | | |
 | :--- | :--- |
-| **Pricing** | $2.00 per 1,000 videos + $0.00005 start fee (≈2,500 videos/month inside Apify's free $5 credit) |
+| **Pricing** | $1.50 per 1,000 videos + $0.00005 start fee (≈3,300 videos/month inside Apify's free $5 credit) |
 | **Run time (measured)** | ~4–8 s for 10 videos of one hashtag |
 | **Engagement rate** | `engagement_rate` = (likes + comments + shares + saves) / views × 100 |
 | **Hashtags** | De-duplicated `hashtags_list` plus `hashtags` with repetition counts |
